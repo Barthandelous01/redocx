@@ -5,10 +5,12 @@
 #include <string.h>
 #include <sys/stat.h>
 #include <stdlib.h>
+#include <stdio.h>
 
 #include "mem.h"
+#include "constants.h"
 
-char *get_contents(char *path)
+void get_contents(char *path)
 {
      /* set up some variables */
      int errp;
@@ -20,14 +22,23 @@ char *get_contents(char *path)
      zip_file_t *file = zip_fopen(archive, "word/document.xml", ZIP_FL_UNCHANGED);
 
      /* find size of file */
-     struct stat st;
-     stat(strcat(full_path, "/word/document.xml"), &st);
-     int size = st.st_size + 10; // add a buffer... just in case
+     struct zip_stat st;
+     zip_stat(archive, "word/document.xml", 0, &st);
+     int size = st.size + 10; // add a buffer... just in case
 
      /* return contents of file */
      char *contents = safe_malloc(size);
      zip_fread(file, contents, size);
-     return contents;
+
+     /* cleanup for libzip */
+     zip_fclose(file);
+     zip_close(archive);
+
+     /* put file contents into temp.xml */
+     FILE *fp;
+     fp = fopen(TEMPFILE, "wt");
+     fputs(contents, fp);
+     fclose(fp);
 }
 
 #endif /* ZIPFILE_C_ */

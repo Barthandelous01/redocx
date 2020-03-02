@@ -5,7 +5,6 @@
 
 int main()
 {
-     char *test = malloc(10000);
-     test = get_contents("/Users/calebbrzezinski/Desktop/wc3.docx");
-     printf("%s", test);
+     get_contents("/Users/calebbrzezinski/Desktop/wc3.docx");
+     return 0;
 }

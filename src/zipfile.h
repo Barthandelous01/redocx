@@ -3,6 +3,6 @@
 
 #include "zipfile.c"
 
-char *get_contents(char *path);
+void get_contents(char *path);
 
 #endif /* ZIPFILE_H_ */
