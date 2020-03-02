@@ -12,6 +12,10 @@
 
 void get_contents(char *path)
 {
+     if(strcmp(path, "") == 0) {
+          fprintf(stderr, "%s", "No filename specified");
+          exit(-1);
+     }
      /* set up some variables */
      int errp;
      char full_path[200];

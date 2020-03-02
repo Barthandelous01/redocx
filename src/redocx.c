@@ -4,6 +4,12 @@
 #include <stdlib.h>
 #include <unistd.h>
 
+void usage()
+{
+     printf("%s", "usage: redocx -f file [-o output]");
+     exit(0);
+}
+
 int main(int argc, char *argv[])
 {
      /* init some variables */
@@ -12,7 +18,7 @@ int main(int argc, char *argv[])
      int opt;
 
      /* parse cli args */
-     while((opt = getopt(argc, argv, ":f:")) != -1)
+     while((opt = getopt(argc, argv, "f:ho:")) != -1)
      {
           switch(opt)
           {
@@ -24,16 +30,18 @@ int main(int argc, char *argv[])
                txtname = optarg;
                printf("output file: %s\n", optarg);
                break;
+          case 'h':
+               usage();
+               break;
           case ':':
                printf("option needs a value\n");
                break;
-          case '?':
-               printf("unknown option: %c\n", optopt);
-          break;
           }
      }
      /* write contents of file to temp.xml */
      get_contents(filename);
+
+     /* parse file contents and write to output.txt */
 
      /* return */
      return 0;
