@@ -25,11 +25,11 @@ int main(int argc, char *argv[])
           {
           case 'f':
                filename = optarg;
-               printf("filename: %s\n", optarg);
+               printf(":: input file: %s\n", optarg);
                break;
           case 'o':
                txtname = optarg;
-               printf("output file: %s\n", optarg);
+               printf(":: output file: %s\n", optarg);
                break;
           case 'h':
                usage();
@@ -45,7 +45,7 @@ int main(int argc, char *argv[])
 
      /* check an error */
      if (strcmp(txtname, "") == 0) {
-          printf("%s", "No output file given. Using default.");
+          printf("%s", ":: No output file given. Using default.");
           txtname = "out.txt";
      }
 

@@ -54,6 +54,7 @@ static void parse_doc(char *docname, char *output)
           if ((xmlStrcmp(node1->name, (const xmlChar *)"body")) == 0) {
                for(node2 = node1->children; node2; node2 = node2->next) {
                     if ((xmlStrcmp(node2->name, (const xmlChar *)"p")) == 0) {
+                         fprintf(fp, "%s", "\n");
                          for(node3 = node2->children; node3; node3 = node3->next) {
                               if ((xmlStrcmp(node3->name, (const xmlChar *)"r")) == 0) {
                                    for (node4 = node3->children; node4; node4 = node4->next) {
