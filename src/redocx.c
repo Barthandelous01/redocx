@@ -7,7 +7,7 @@
 
 void usage()
 {
-     printf("%s", "usage: redocx -f file [-o output]");
+     printf("%s", "usage: redocx -f file [-x] [-o output]");
      exit(0);
 }
 
@@ -17,9 +17,10 @@ int main(int argc, char *argv[])
      char *filename = safe_malloc(200);
      char *txtname = safe_malloc(200);
      int opt;
+     int xmlarg = 0;
 
      /* parse cli args */
-     while((opt = getopt(argc, argv, "f:ho:")) != -1)
+     while((opt = getopt(argc, argv, "f:ho:x")) != -1)
      {
           switch(opt)
           {
@@ -33,6 +34,9 @@ int main(int argc, char *argv[])
                break;
           case 'h':
                usage();
+               break;
+          case 'x':
+               xmlarg = 1;
                break;
           case ':':
                printf("option needs a value\n");
@@ -52,8 +56,8 @@ int main(int argc, char *argv[])
      /* parse the doc and write text to a file */
      parse_doc(TEMPFILE, txtname);
 
-     /* remove our extra file */
-     remove(TEMPFILE);
+     if (xmlarg == 0)
+          remove(TEMPFILE);
 
      /* return */
      return 0;

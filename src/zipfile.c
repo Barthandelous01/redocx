@@ -17,12 +17,18 @@ void get_contents(char *path)
           exit(-1);
      }
      /* set up some variables */
-     int errp;
+     int errp = 0;
      char full_path[200];
      strcpy(full_path, path);
 
      /* open ziped word document file */
      zip_t *archive = zip_open(path, ZIP_RDONLY, &errp);
+
+     /* quick error check */
+     if (errp != 0) {
+          fprintf(stderr, "%s", "Error extracting from zip archive");
+          exit(-1);
+     }
      zip_file_t *file = zip_fopen(archive, "word/document.xml", ZIP_FL_UNCHANGED);
 
      /* find size of file */
