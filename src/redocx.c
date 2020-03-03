@@ -1,4 +1,5 @@
 #include "zipfile.h"
+#include "xml.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -42,6 +43,10 @@ int main(int argc, char *argv[])
      get_contents(filename);
 
      /* parse file contents and write to output.txt */
+     parse_doc(TEMPFILE, txtname);
+
+     /* remove our extra file */
+     remove(TEMPFILE);
 
      /* return */
      return 0;
