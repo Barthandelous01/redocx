@@ -17,6 +17,8 @@ static void parse_doc(char *docname, char *output)
 
      /* do actual parsing of document */
      doc = xmlReadFile(docname, NULL, 0);
+
+     /* error checking! */
      if (doc == NULL ) {
           fprintf(stderr,"Document not parsed successfully. \n");
           return;
@@ -32,11 +34,21 @@ static void parse_doc(char *docname, char *output)
           xmlFreeDoc(doc);
           return;
      }
+
+     /* init a few more variables */
      xmlChar *key;
 
      FILE *fp;
      fp = fopen(output, "w");
 
+     /* though this seems like a mess,
+      * it's actually quite efficient.
+      * It uses branch pruning to  cut off
+      * whichever layers of the XML node tree
+      * are not immediatly useful.
+      * Don't worry too much about the pointer math;
+      * it's all error-checked.
+      */
      first_child = root->children;
      for (node1 = first_child; node1; node1 = node1->next) {
           if ((xmlStrcmp(node1->name, (const xmlChar *)"body")) == 0) {
@@ -56,6 +68,8 @@ static void parse_doc(char *docname, char *output)
                }
           }
      }
+
+     /* de-init at the end of the day */
      fclose(fp);
      xmlFree(key);
      xmlFreeDoc(doc);

@@ -39,10 +39,17 @@ int main(int argc, char *argv[])
                break;
           }
      }
+
      /* write contents of file to temp.xml */
      get_contents(filename);
 
-     /* parse file contents and write to output.txt */
+     /* check an error */
+     if (strcmp(txtname, "") == 0) {
+          printf("%s", "No output file given. Using default.");
+          txtname = "out.txt";
+     }
+
+     /* parse the doc and write text to a file */
      parse_doc(TEMPFILE, txtname);
 
      /* remove our extra file */
