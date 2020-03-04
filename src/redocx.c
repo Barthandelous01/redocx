@@ -61,6 +61,7 @@ int main(int argc, char *argv[])
      /* parse the doc and write text to a file */
      parse_doc(TEMPFILE, fp);
 
+     /* check if they want to remove the temp xml or keep it */
      if (xmlarg == 0)
           remove(TEMPFILE);
 
