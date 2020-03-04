@@ -2,7 +2,7 @@
 A blazing-fast `.docx` decoder
 
 ## Usage
-`redocx` is super simple to use! Just run
+`redocx` is super simple to use! Just run:
 ```bash
 $ redocx -f path/to/input/file.docx [-o path/to/optional/output/file.txt]
 ```
