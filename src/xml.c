@@ -9,7 +9,7 @@
 
 #include "mem.h"
 
-static void parse_doc(char *docname, char *output)
+static void parse_doc(char *docname, FILE *fp)
 {
      /* init variables */
      xmlDoc *doc;
@@ -37,9 +37,6 @@ static void parse_doc(char *docname, char *output)
 
      /* init a few more variables */
      xmlChar *key;
-
-     FILE *fp;
-     fp = fopen(output, "w");
 
      /* though this seems like a mess,
       * it's actually quite efficient.

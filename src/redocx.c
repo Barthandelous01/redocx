@@ -16,7 +16,9 @@ int main(int argc, char *argv[])
      /* init some variables */
      char *filename = safe_malloc(200);
      char *txtname = safe_malloc(200);
+     txtname = "";
      int opt;
+     FILE *fp = NULL;
      int xmlarg = 0;
 
      /* parse cli args */
@@ -26,11 +28,9 @@ int main(int argc, char *argv[])
           {
           case 'f':
                filename = optarg;
-               printf(":: input file: %s\n", optarg);
                break;
           case 'o':
                txtname = optarg;
-               printf(":: output file: %s\n", optarg);
                break;
           case 'h':
                usage();
@@ -47,14 +47,19 @@ int main(int argc, char *argv[])
      /* write contents of file to temp.xml */
      get_contents(filename);
 
-     /* check an error */
+     /* do output parsing */
      if (strcmp(txtname, "") == 0) {
-          printf("%s", ":: No output file given. Using default.");
-          txtname = "out.txt";
+          fp = stdout;
+     } else {
+          fp = fopen(txtname, "w");
+          if (fp == NULL) {
+               printf("%s", "Error opening file");
+               exit(-1);
+          }
      }
 
      /* parse the doc and write text to a file */
-     parse_doc(TEMPFILE, txtname);
+     parse_doc(TEMPFILE, fp);
 
      if (xmlarg == 0)
           remove(TEMPFILE);

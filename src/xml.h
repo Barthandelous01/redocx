@@ -3,6 +3,6 @@
 
 #include "xml.c"
 
-static void parse_doc(char *docname, char *output);
+static void parse_doc(char *docname, FILE *fp);
 
 #endif /* XML_H_ */
