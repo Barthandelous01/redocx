@@ -57,7 +57,10 @@ static void parse_doc(char *docname, FILE *fp)
                                    for (node4 = node3->children; node4; node4 = node4->next) {
                                         if((!xmlStrcmp(node4->name, (const xmlChar *)"t"))) {
                                              key = xmlNodeListGetString(doc, node4->xmlChildrenNode, 1);
-                                             fprintf(fp, "%s", key);
+                                             if (key != NULL) {
+                                                  fprintf(fp, "%s", key);
+                                                  xmlFree(key);
+                                             }
                                         }
                                    }
                               }
@@ -69,7 +72,6 @@ static void parse_doc(char *docname, FILE *fp)
 
      /* de-init at the end of the day */
      fclose(fp);
-     xmlFree(key);
      xmlFreeDoc(doc);
 }
 
