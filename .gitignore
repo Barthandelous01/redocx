@@ -1,28 +1,42 @@
+# This package is controled by the GNU Autotools toolchain.
+
+# Automake
 /Makefile
 /Makefile.in
 src/Makefile
+src/.deps/
 src/Makefile.in
+
+# root directory
 /aclocal.m4
 /autom4te.cache/
 /config.*
 configure
-/m4/
-/stamp-h?
-.deps/
-.dirstamp
-*.o
-*.org
-a.out
 compile
 depcomp
 install-sh
 missing
+/m4/
+/stamp-h?
+.dirstamp
+
+# build fragments
+*.o
+src/a.out.dSYM/Contents/Info.plist
+a.out
+/build
+
+# emacs
+*.org
+
+# temp files from testing
 src/comp.sh
 src/new.txt
-src/a.out.dSYM/Contents/Info.plist
 src/temp.xml
 src/test.txt
 src/out.txt
-.DS_Store
 src/redocx
 *.txt
+
+# MacOS Formatting files
+.DS_Store
