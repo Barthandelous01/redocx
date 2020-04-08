@@ -1,6 +1,9 @@
 #include "zipfile.h"
 #include "xml.h"
+#include "mem.h"
+#include "constants.h"
 
+#include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
