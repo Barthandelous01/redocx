@@ -9,7 +9,7 @@
 
 #include "mem.h"
 
-static void parse_doc(char *docname, FILE *fp)
+void parse_doc(char *docname, FILE *fp)
 {
      /* init variables */
      xmlDoc *doc;
