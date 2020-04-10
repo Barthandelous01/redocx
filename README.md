@@ -7,7 +7,7 @@ A blazing-fast `.docx` decoder
 $ redocx -f path/to/input/file.docx [-o path/to/optional/output/file.txt]
 ```
 ## Installation
-There are two dependencies for `redocx`: `libzip` and `libxml2`. How those two things are installed varies based on your system. For example:
+There are two dependencies for `redocx`: `libzip` and `libxml2`. Both of these libraries must also be registered with pkg-config. How those two things are installed varies based on your system. For example:
 
 * MacOS
 ```bash
@@ -17,14 +17,14 @@ brew install libzip
 
 * Arch Linux
 ```bash
-sudo pacman -S libzip
 sudo pacman -S libxml2
+sudo pacman -S libzip
 ```
-Once those are installed, clone the repo, and move into the directory. Then run:
+Once those are installed, clone the repo, and move into the directory. Then follow the ritual:
 ```bash
-cd src
+./configure
 make
-sudo make install # if you don't want to install the binary yourself
+sudo make install
 ```
 
 ## Inspiration
@@ -37,4 +37,5 @@ For a larger document, it takes slightly longer, but...
 For a huge novel (115kb):
 <img src="res/bench_huge.png">
 It's faster than anything else out there for decoding text from a `.docx` archive.
+It may also be intiresting to note that I wrote a `rust` version of this program. However, it was abandoned because `redocx` performed 13.55 times (on average) better.
 Thanks to [sharkdp](https://github.com/sharkdp) for the [utility](https://github.com/sharkdp/hyperfine) used in the benchmarking.
